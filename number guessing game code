@@ -1,0 +1,28 @@
+# building number guessing game
+
+import random 
+
+secret_number = random.randint(1 , 100)
+attempts = 0
+
+print("Apka iss number game me swagat hai !!!")
+
+print(input("Apna username enter karo username lagbhag 5-6 letters ka hona chahiye :::  "))
+
+print("Apka input 5 se zyada hai fir bhi ye run hoga")
+
+while True :
+    try:
+        guess = int(input("Apka guess likhe")) 
+        attempts += 1
+        
+        if guess > secret_number:
+            print("too high , thoda or zor lagao dimaag par")
+        elif guess < secret_number:
+            print("too low , thoda or zor lagao")   
+
+        else:
+            print("Congrats!!! , sahi number choose kiya")
+            break ;
+    except ValueError:
+           print("try with real number")                                                     
