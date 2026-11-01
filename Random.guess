@@ -1,0 +1,62 @@
+
+import random
+
+def word_guessing_game():
+    words = ["dolly chaiwala", "python", "physics", "matrix", "gravity", "coding"]
+    
+    secret_word = random.choice(words)
+    guessed_letters = []
+    
+    max_attempts = 6  # Total kitne attempts allowed hain
+    attempts_left = max_attempts
+    
+    print("--- Welcome to the Word Guessing Game! ---")
+    print("(Hint: Ek famous internet sensation bhi ho sakta hai list mein! 😉)")
+    
+    while attempts_left > 0:
+        # Current state dikhana (spaces ko handle karte hue)
+        display_word = ""
+        for letter in secret_word:
+            if letter == " ":
+                display_word += "   "
+            elif letter in guessed_letters:
+                display_word += letter + " "
+            else:
+                display_word += "_ "
+                
+        print("\nWord:", display_word)
+        
+        # Check karna ki pura word jeet gaye kya
+        if "_" not in display_word.replace(" ", ""):
+            print(f"\n🎉 Arre wah! Tumne pura word sahi guess kar liya: '{secret_word}'!")
+            break
+            
+        # User se letter maangna
+        guess = input("Ek letter guess karo: ").lower()
+        
+        if len(guess) != 1 or not guess.isalpha():
+            print("❌ Kripya sirf ek single alphabet enter karo!")
+            continue
+            
+        if guess in guessed_letters:
+            print("⚠️ Yeh letter tum pehle hi guess kar chuki ho!")
+            continue
+            
+        guessed_letters.append(guess)
+        
+        # Check using if-else whether the guess is correct or wrong
+        if guess in secret_word:
+            print(f"✅ Sahi hai! '{guess}' word ke andar hai.")
+        else:
+            attempts_left -= 1
+            print(f"❌ Galat! '{guess}' word mein nahi hai.")
+            
+        # Attempts ka status track karna using if-else logic
+        attempts_made = max_attempts - attempts_left
+        print(f"📊 Stats -> Hue attempts: {attempts_made} | Baaki attempts: {attempts_left}")
+            
+    if attempts_left == 0:
+        print(f"\nGame Over! Sahi word tha: '{secret_word}'")
+
+if __name__ == "__main__":
+    word_guessing_game()
